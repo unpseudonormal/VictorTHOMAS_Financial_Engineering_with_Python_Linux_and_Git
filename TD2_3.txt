@@ -1,0 +1,76 @@
+TD5/9: Work with APIs (Application Program-
+ming Interface)
+Exercise 1: Extract data from a website
+The Domesday Book is the greatest medieval census. It lists the manors
+(private properties) in every place of every county in England in the years 1066
+and 1086, before and after the Norman conquest. OpenDomesday presents it
+in a modern-human-readable website, as well as an application programming
+interface (API).
+We will use this API to extract some data from our command-line shell.
+The Internet is your friend, do not hesitate to ask his help to find
+a better command.
+Exercise 1:.1 curl
+Check the data on https ://opendomesday.org/api/, for instance
+— https ://opendomesday.org/api/1.0/county/
+— https ://opendomesday.org/api/1.0/place/2346/
+— https ://opendomesday.org/api/1.0/manor/181/
+
+
+curl https://opendomesday.org/api/1.0/county/
+curl https://opendomesday.org/api/1.0/place/2346/
+curl https://opendomesday.org/api/1.0/manor/181/
+
+
+
+Exercise 1:.2 curl and grep
+Let’s try to get the ids for all the places in Derbyshire !
+
+curl https://opendomesday.org/api/1.0/county/Derbyshire/ | grep -oP '(?<="id":)\d+'
+
+Exercise 1:.3 curl, grep and for
+Now that we have ids for all the places in Derbyshire, we can load all their
+details...
+And from their details, we can list all the details of their manors.
+Go grep the data !
+You may write the raw data into a file to avoid downloading it
+everytime
+
+nano C1.sh
+
+#!/bin/bash
+
+# Retrieve the ids of all the places in Derbyshire
+ids=$(curl https://opendomesday.org/api/1.0/county/Derbyshire/ | grep -oP '(?<="id":)\d+')
+
+# Loop through the ids and retrieve the details of each place and its manors
+for id in $ids
+do
+    # Retrieve the details of the place
+    place=$(curl https://opendomesday.org/api/1.0/place/$id/)
+    echo "$place" >> derbyshire_places.json
+    
+    # Extract the ids of the place's manors
+    manor_ids=$(echo "$place" | grep -oP '(?<="manor":)\[\d+(,\d+)*\]' | grep -oP '\d+')
+
+    # Loop through the manor ids and retrieve the details of each manor
+    for manor_id in $manor_ids
+    do
+        manor=$(curl https://opendomesday.org/api/1.0/manor/$manor_id/)
+        echo "$manor" >> derbyshire_manors.json
+    done
+done
+
+
+bash c1.sh
+
+
+Exercise 1:.4 curl, grep, for and sed
+Now that we have a heap of raw data, we will extract the interesting parts.
+In our case we want to count the geld paid by each manor and compare it to
+the number of ploughs it owns.
+— Can you find the corresponding json fields ?
+— Then you can list these numbers for each manor in Derbyshire.
+— And format this in a proper comma-separated values (CSV) file
+
+
+

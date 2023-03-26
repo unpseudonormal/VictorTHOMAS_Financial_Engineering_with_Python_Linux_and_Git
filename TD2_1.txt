@@ -1,0 +1,57 @@
+TD3/9: Work with text manipulation tools in
+Linux
+
+Q1. Display the list of files and folders at the root using ls -l
+
+
+ls -l /
+
+
+
+Q2. In a pipeline (using |), append a grep instruction to only display information of bin
+
+
+
+ls -l / | grep bin
+
+
+Q3. Append an awk instruction to only display the size of bin
+
+ls -l / | grep bin | awk '{print $5}'
+
+
+Q4. Now rather extract the month, day and year of creation of the folder bin
+
+
+ls -ld /bin | awk '{print $6"-"$3"-"$7}'
+
+Q5. Now rearrange the instruction to get the following output format : 2020-Oct-26 (from original data : Oct 26 2020)
+
+
+ls -ld /bin | awk '{print $7"-"$6"-"$3}' | awk -F"-" '{print $1"-"$2"-"$3}' | awk '{print $3"-"$1"-"$2}'
+
+Q1. What is the purpose of running the command "curl https://en.wikipedia.org/wiki/List_of_cyberattacks > cyberattacks.txt"?
+The purpose of this command is to download the web page content of the "List of cyberattacks" page on Wikipedia and store it in a file named "cyberattacks.txt".
+
+Q2. How can you use grep to extract all the lines that contain the keyword "meta" from the "cyberattacks.txt" file?
+
+
+grep "meta" cyberattacks.txt
+
+Q3. How can you modify the previous grep command to only extract "meta" and the first following word using regex?
+
+grep -o "meta [^ ]*" cyberattacks.txt
+
+Q4. How can you modify the previous command to only extract the following word (but not the keyword "meta")?
+
+grep -o "meta [^ ]*" cyberattacks.txt | cut -d' ' -f2
+
+
+
+Q6. How can you extract the tab title from the "cyberattacks.txt" file?
+
+grep "<title>" cyberattacks.txt | sed -n 's/.*<title>\(.*\)<\/title>.*/\1/p'
+
+Q7. How can you make a list of cyberattacks based on section titles from the "cyberattacks.txt" file?
+
+grep "<span class=\"mw-headline\"" cyberattacks.txt | sed -n 's/.*>\(.*\

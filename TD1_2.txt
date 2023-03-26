@@ -1,0 +1,167 @@
+TD1_2: Fundamental Linux functionalities
+Exercise 1: Access general computer informations
+
+Q1. Put system up to date.
+
+sudo apt update && sudo apt upgrade
+
+Q2. Display:
+
+a)    Linux version
+
+uname -a
+
+b)    Current processes and memory usage associated
+
+top
+
+c)    Display it in a more pleasant way ("more readable for humans")
+
+htop
+
+d)    Number of processors
+
+nproc
+
+e)    L1, L2 and L3 cache size
+
+
+lscpu | grep cache
+
+f)    Disk space
+
+df -h
+
+g)    Mounted devices
+
+mount | column -t
+
+h)    Connected USB devices
+
+lsusb
+
+i)    Hostname
+
+hostname
+
+
+Exercise 2: Shell - Variables and scripts scope
+
+Q1. Create a variable x and assign it the short text piri pimpin.
+
+x="piri pimpin"
+
+Q2. Display the value of this variable.
+
+echo $x
+
+Q3. Add to this value the following text piri pimpon. It should contain the following: piri pimpim piri pimpon.
+
+x="$x piri pimpon"
+
+Q4. Create a folder named my_programs, then enter into that folder.
+
+mkdir my_programs && cd my_programs
+
+Q5. Create a script named pilou that displays pilou pilou.
+
+echo "pilou pilou" > pilou && cat pilou
+
+Q6. Run this script.
+
+bash pilou
+
+Q7. Make this script executable.
+
+chmod +x pilou
+
+Q8. Run the script by writing its name only.
+
+./pilou
+
+Q9. Programs called from the terminal are usually found thanks to a variable named PATH. Display the content of the variable PATH.
+
+echo $PATH
+
+Q10. Add the path of your current location to the global variable PATH.
+
+export PATH=$PATH:/path/to/current/location
+
+Q11. When you are sure of the result, export it.
+
+export PATH
+
+Q12. Go to your home directory.
+
+cd ~
+
+Q13. Run your script by writing its name only.
+
+pilou
+
+Q14. Change the value of the PATH in the .profile file in order to make it permanent.
+
+Edit the .profile file and add the following line at the end:
+
+
+export PATH=$PATH:/path/to/current/location
+
+Q15. Create a new shell and run your script using its name only.
+
+pilou
+
+
+Exercice 3 Scheduling task - daemon
+
+Q1. Create a script say_hello.sh:
+
+nano say_hello.sh
+echo "$(date +'%Y-%m-%d %H:%M:%S') Hello" >> hellos.txt
+
+Q2. Make the script executable.
+
+chmod +x say_hello.sh
+
+Q3. Use crontab to schedule the running of the script every minute.
+
+crontab -e
+
+* * * * * /home/admin/say_hello.sh
+
+Exercice 4
+
+Q1. It should write it in a file named 'hellos.txt'.
+Each new output should be appended to the file (it shouldn't remove previous hellos).
+
+bash
+
+#!/bin/bash
+echo "$(date) Hello" >> hellos.txt
+
+Q2. Make the script executable.
+
+bash
+
+chmod +x say_hello.sh
+
+Q3. Use crontab to schedule the running of the script every minute.
+
+crontab -e
+
+
+Q6. Compute the sha256sum of gentle_script. Store it into a file named log_sha.
+
+
+sha256sum gentle_script.sh > log_sha
+
+Q7. Now corrupt the file by adding a line of code that deletes any file starting with ".sensible".
+This step should be performed manually, and is not recommended to execute.
+
+
+# DO NOT RUN THIS
+rm -rf .sensible*
+
+Q8. Compute again the sha256sum of gentle_script. Store it into the log_sha file.
+
+
+sha256sum gentle_script.sh > log_sha

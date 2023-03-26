@@ -1,0 +1,57 @@
+Exercise 1: Configure Git
+
+Q1)  git --version
+Q2) git config --global user.name "Victorthomas"
+git config --global user.email "ttthomasvictor57@gmail.com"
+
+
+Exercise 2: Basic workflow with a single file
+
+Q1)  git init
+Q2)  ls -A: 
+Q3)  git statu
+Q4) echo "# Test repository" > readme.md: Create a new file named "readme.md" with the content "# Test repository".
+Q5) git status
+
+
+
+Exercise 3:
+Q1) touch main.py functions.py
+Q2) git status
+Q3) git add main.py
+Q4) git status
+Q5) git commit -m "Add main file"
+Q6) git status
+Q7) git add functions.py then git commit -m "Add file"
+Q8) git status
+Q9) git log --oneline
+
+Exercise 4:
+Q1) touch requirements.txt .gitignore .private
+Q2) git status
+Q3) git add .
+Q4) git status
+Q5) git commit -m "Add staged files"
+Q6) git status
+Q7) git log --oneline
+
+Exercise 5:
+Q1) touch temp.ipynb
+Q2) git status
+Q3) echo "temp.ipynb" >> .gitignore
+Q4) git status
+Q5) touch temp.aux temp.log
+Q6) git status
+Q7) vim .gitignore then insert temp*
+Q8) git status
+Q9) echo ".private*" >> .git/info/exclude
+
+Exercise 6:
+Q1) vim readme.md
+Q2) git add readme.md
+Q3) git diff HEAD
+Q4) git commit -m "Add change"
+Q5) git diff HEAD^ HEAD
+Q6) git diff HEAD
+Q7) vim readme.md
+Q8) git diff HEAD
