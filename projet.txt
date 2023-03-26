@@ -1,0 +1,22 @@
+mkdir mon_dossier_scraping.dir
+cd mon_dossier_scraping.dir
+
+
+#!/bin/bash
+
+URL="https://cryptoast.fr/cours-bitcoin-1.html"
+
+while true; do
+  # Récupérer la page HTML
+  html_content=$(curl -s $URL)
+
+  # Extraire la valeur du Bitcoin à partir de la balise <p class="price">
+  bitcoin_price=$(echo "$html_content" | grep -oP '<p class="price">\K[^<]*')
+
+  # Afficher la valeur du Bitcoin
+  echo "Le prix du Bitcoin est : $bitcoin_price"
+
+  # Attendre 5 secondes avant de répéter
+  sleep 5
+done
+
