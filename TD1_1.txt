@@ -59,7 +59,7 @@ mkdir linux_ex_1
 cd linux_ex_1
 
 5. Create an empty text file named [first_name]_[last_name].txt (e.g. alexis_bogroff.txt)
-touch edgar_oustrain.txt
+touch victor_thomas.txt
 
 
 6. Create a folder notes
