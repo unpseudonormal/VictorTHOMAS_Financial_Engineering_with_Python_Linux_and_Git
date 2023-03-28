@@ -20,3 +20,29 @@ while true; do
   sleep 5
 done
 
+URL="https://www.tradingsat.com/bnp-paribas-acta-FR0000131104/" OUTPUT_FILE="bnp_p>
+
+# Write the CSV header
+echo "Timestamp,Price" > $OUTPUT_FILE
+
+while true; do 
+
+# Récupérer la page HTML
+  html_content=$(curl -s $URL) 
+
+# Extraire la valeur du prix à partir de la balise <span class="price">
+  bnp_price=$(echo "$html_content" | grep -oP '<span class="price">\K[^<]*') 
+
+# Get the current timestamp
+  timestamp=$(date +"%Y-%m-%d %H:%M:%S") 
+
+# Write the timestamp and price to the CSV file
+  echo "$timestamp,$bnp_price" >> $OUTPUT_FILE
+
+# Afficher la valeur du prix
+  echo "Le prix de l'action BNP Paribas est : $bnp_price €"
+# Attendre 5 secondes avant de répéter
+
+  sleep 5
+done
+
