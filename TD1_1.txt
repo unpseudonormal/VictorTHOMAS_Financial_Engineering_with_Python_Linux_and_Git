@@ -58,7 +58,7 @@ mkdir linux_ex_1
 4. Go into this folder
 cd linux_ex_1
 
-5. Create an empty text file named [first_name]_[last_name].txt (e.g. alexis_bogroff.txt)
+5. Create an empty text file named [first_name]_[last_name].txt 
 touch victor_thomas.txt
 
 
